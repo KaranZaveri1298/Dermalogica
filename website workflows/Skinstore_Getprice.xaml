@@ -1,0 +1,647 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Skinstore_Getprice" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
+    <x:Property Name="out_Price" Type="OutArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>3318,6597.33333333333</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Skinstore_Getprice_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="32">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="28">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Data.Entity</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="In the following workflow we will access skinstore website and find desired prodcuts with given size , if product is found we fetch price of product and write into a product report&#xA; " DisplayName="Skinstore_Getprice" sap:VirtualizedContainerService.HintSize="3328,6594" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Default="[New System.Data.DataTable]" Name="dt_ExtractDataTable" />
+      <Variable x:TypeArguments="x:String" Name="strDataTable" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="3286,93.3333333333333" sap2010:WorkflowViewState.IdRef="LogMessage_14" Level="Info" Message="[&quot;opening skinstore webpage&quot;]" />
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="3286,6324.66666666667" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+      <TryCatch.Try>
+        <ui:OpenBrowser AutomaticallyDownloadWebDriver="{x:Null}" CommunicationMethod="{x:Null}" Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Open Browser to Notino website" sap:VirtualizedContainerService.HintSize="2522,6090" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" Url="[in_TransactionItem.SpecificContent(&quot;Website&quot;).ToString]">
+          <ui:OpenBrowser.Body>
+            <ActivityAction x:TypeArguments="x:Object">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+              </ActivityAction.Argument>
+              <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="2488,5988" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                <Sequence.Variables>
+                  <Variable x:TypeArguments="x:Boolean" Name="boolAds" />
+                  <Variable x:TypeArguments="x:Boolean" Name="boolProUnavail" />
+                  <Variable x:TypeArguments="x:Boolean" Name="boolcountry" />
+                  <Variable x:TypeArguments="x:String" Name="strProduct" />
+                </Sequence.Variables>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Delay Duration="00:00:03" sap:VirtualizedContainerService.HintSize="2446,22" sap2010:WorkflowViewState.IdRef="Delay_1" />
+                <ui:UiElementExists DisplayName="Element Exists ADS" Exists="[boolAds]" sap:VirtualizedContainerService.HintSize="2446,106" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
+                  <ui:UiElementExists.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="0c93dd15-549a-4d29-ba6e-b460037f6ba3" InformativeScreenshot="0350c7b3318b92395bed82b0f4fe5588" Selector="&lt;html app='chrome.exe' title='SkinStore*' /&gt;&lt;webctrl tag='SECTION' /&gt;">
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                      <ui:Target.WaitForReady>
+                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                      </ui:Target.WaitForReady>
+                    </ui:Target>
+                  </ui:UiElementExists.Target>
+                </ui:UiElementExists>
+                <If Condition="[boolAds]" sap:VirtualizedContainerService.HintSize="2446,387.333333333333" sap2010:WorkflowViewState.IdRef="If_1">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <If.Then>
+                    <Sequence sap:VirtualizedContainerService.HintSize="376,198" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click CANCEL 'BUTTON'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT">
+                        <ui:Click.CursorPosition>
+                          <ui:CursorPosition Position="Center">
+                            <ui:CursorPosition.OffsetX>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:CursorPosition.OffsetX>
+                            <ui:CursorPosition.OffsetY>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:CursorPosition.OffsetY>
+                          </ui:CursorPosition>
+                        </ui:Click.CursorPosition>
+                        <ui:Click.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="ad34e74a-8ac2-4c03-99f1-684ee7371290" InformativeScreenshot="557639f55112955d66a1cb50302f71cb" Selector="&lt;html app='chrome.exe' title='SkinStore: *' /&gt;&lt;webctrl parentid='home' tag='BUTTON' type='button' /&gt;">
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:Click.Target>
+                      </ui:Click>
+                    </Sequence>
+                  </If.Then>
+                  <If.Else>
+                    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_3">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </Sequence>
+                  </If.Else>
+                </If>
+                <ui:UiElementExists DisplayName="Element Exists country &amp; currency set" Exists="[boolcountry]" sap:VirtualizedContainerService.HintSize="2446,106" sap2010:WorkflowViewState.IdRef="UiElementExists_3">
+                  <ui:UiElementExists.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="2c80783d-5d3d-4fa6-8353-d4faf1c205a7" InformativeScreenshot="4a4e2e8dd19103be2bda5b43625006e6" Selector="&lt;html app='chrome.exe' title='SkinStore: *' /&gt;&lt;webctrl aaname=' us - EUR ' tag='SPAN' innertext=' us - EUR ' /&gt;">
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                      <ui:Target.WaitForReady>
+                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                      </ui:Target.WaitForReady>
+                    </ui:Target>
+                  </ui:UiElementExists.Target>
+                </ui:UiElementExists>
+                <If Condition="[boolcountry]" DisplayName="Ifcountry and currency set" sap:VirtualizedContainerService.HintSize="2446,943.333333333333" sap2010:WorkflowViewState.IdRef="If_4">
+                  <If.Then>
+                    <Sequence sap:VirtualizedContainerService.HintSize="1200,84" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </Sequence>
+                  </If.Then>
+                  <If.Else>
+                    <Sequence sap:VirtualizedContainerService.HintSize="1200,784" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Sequence sap:VirtualizedContainerService.HintSize="1158,692" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click select country" sap:VirtualizedContainerService.HintSize="358.666666666667,106" sap2010:WorkflowViewState.IdRef="Click_3" KeyModifiers="None" MouseButton="BTN_LEFT">
+                          <ui:Click.CursorPosition>
+                            <ui:CursorPosition Position="Center">
+                              <ui:CursorPosition.OffsetX>
+                                <InArgument x:TypeArguments="x:Int32" />
+                              </ui:CursorPosition.OffsetX>
+                              <ui:CursorPosition.OffsetY>
+                                <InArgument x:TypeArguments="x:Int32" />
+                              </ui:CursorPosition.OffsetY>
+                            </ui:CursorPosition>
+                          </ui:Click.CursorPosition>
+                          <ui:Click.Target>
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="14634fec-a2ea-4d0d-a2cb-a9d490a5c975" InformativeScreenshot="11cc94bed73bd2eae683a702e2ace101" Selector="&lt;html app='chrome.exe' title='SkinStore:*' /&gt;&lt;webctrl aaname=' us - USD ' tag='SPAN' /&gt;">
+                              <ui:Target.TimeoutMS>
+                                <InArgument x:TypeArguments="x:Int32" />
+                              </ui:Target.TimeoutMS>
+                              <ui:Target.WaitForReady>
+                                <InArgument x:TypeArguments="ui:WaitForReady" />
+                              </ui:Target.WaitForReady>
+                            </ui:Target>
+                          </ui:Click.Target>
+                        </ui:Click>
+                        <ui:SelectItem AlterIfDisabled="{x:Null}" ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Select Item 'country as France" sap:VirtualizedContainerService.HintSize="358.666666666667,134" sap2010:WorkflowViewState.IdRef="SelectItem_1" Item="France">
+                          <ui:SelectItem.Items>
+                            <scg:List x:TypeArguments="x:String" Capacity="50">
+                              <x:String>India</x:String>
+                              <x:String>American Samoa</x:String>
+                              <x:String>Andorra</x:String>
+                              <x:String>Angola</x:String>
+                              <x:String>Anguilla</x:String>
+                              <x:String>Antarctica</x:String>
+                              <x:String>Antigua and Barbuda</x:String>
+                              <x:String>Argentina</x:String>
+                              <x:String>Aruba</x:String>
+                              <x:String>Australia</x:String>
+                              <x:String>Austria</x:String>
+                              <x:String>Azerbaijan</x:String>
+                              <x:String>Bahamas</x:String>
+                              <x:String>Bahrain</x:String>
+                              <x:String>Bangladesh</x:String>
+                              <x:String>Barbados</x:String>
+                              <x:String>Belgium</x:String>
+                              <x:String>Belize</x:String>
+                              <x:String>Benin</x:String>
+                              <x:String>Bermuda</x:String>
+                              <x:String>Bhutan</x:String>
+                              <x:String>Bolivia</x:String>
+                              <x:String>Bosnia and Herzegovina</x:String>
+                              <x:String>Botswana</x:String>
+                              <x:String>Bouvet Island</x:String>
+                              <x:String>Brazil</x:String>
+                              <x:String>British Indian Ocean Territory</x:String>
+                              <x:String>Brunei Darussalam</x:String>
+                              <x:String>Bulgaria</x:String>
+                              <x:String>Burkina Faso</x:String>
+                              <x:String>Burundi</x:String>
+                              <x:String>Cambodia</x:String>
+                              <x:String>Cameroon</x:String>
+                              <x:String>Canada</x:String>
+                              <x:String>Cape Verde</x:String>
+                              <x:String>Cayman Islands</x:String>
+                              <x:String>Central African Republic</x:String>
+                              <x:String>Chad</x:String>
+                              <x:String>Chile</x:String>
+                              <x:String>China Mainland</x:String>
+                              <x:String>Christmas Island</x:String>
+                              <x:String>Cocos (Keeling) Islands</x:String>
+                              <x:String>Comoros</x:String>
+                              <x:String>Congo</x:String>
+                              <x:String>Congo, the Democratic Republic of the</x:String>
+                              <x:String>Cook Islands</x:String>
+                              <x:String>Costa Rica</x:String>
+                              <x:String>Croatia</x:String>
+                              <x:String>Cyprus</x:String>
+                              <x:String>Czech Republic</x:String>
+                            </scg:List>
+                          </ui:SelectItem.Items>
+                          <ui:SelectItem.Target>
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="a94fb9d1-ae98-4db3-a7ad-b28c86ff4466" InformativeScreenshot="b1c0e8d16a98439e670f010148fa711b" Selector="&lt;html app='chrome.exe' title='SkinStore: *' /&gt;&lt;webctrl tag='SELECT' /&gt;">
+                              <ui:Target.TimeoutMS>
+                                <InArgument x:TypeArguments="x:Int32" />
+                              </ui:Target.TimeoutMS>
+                              <ui:Target.WaitForReady>
+                                <InArgument x:TypeArguments="ui:WaitForReady" />
+                              </ui:Target.WaitForReady>
+                            </ui:Target>
+                          </ui:SelectItem.Target>
+                        </ui:SelectItem>
+                        <ui:SelectItem ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" AlterIfDisabled="True" DisplayName="Select Item currency as Euro" sap:VirtualizedContainerService.HintSize="358.666666666667,134" sap2010:WorkflowViewState.IdRef="SelectItem_2" Item="€ EUR">
+                          <ui:SelectItem.Items>
+                            <scg:List x:TypeArguments="x:String" Capacity="16">
+                              <x:String>$ USD</x:String>
+                              <x:String>A$ AUD</x:String>
+                              <x:String>CA$ CAD</x:String>
+                              <x:String>¥ CNY</x:String>
+                              <x:String>kr DKK</x:String>
+                              <x:String>€ EUR</x:String>
+                              <x:String>£ GBP</x:String>
+                              <x:String>HK$ HKD</x:String>
+                              <x:String>kr NOK</x:String>
+                              <x:String>NZ$ NZD</x:String>
+                              <x:String>kr SEK</x:String>
+                            </scg:List>
+                          </ui:SelectItem.Items>
+                          <ui:SelectItem.Target>
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="55614913-3615-4606-98e0-26b178f4c869" InformativeScreenshot="cbfbc3ae90126c96491bbebb8a531b5a" Selector="&lt;html app='chrome.exe' title='SkinStore: *' /&gt;&lt;webctrl tag='SELECT' class='sessionSettings_currencySelect' parentclass='sessionSettings_currency' /&gt;">
+                              <ui:Target.TimeoutMS>
+                                <InArgument x:TypeArguments="x:Int32" />
+                              </ui:Target.TimeoutMS>
+                              <ui:Target.WaitForReady>
+                                <InArgument x:TypeArguments="ui:WaitForReady" />
+                              </ui:Target.WaitForReady>
+                            </ui:Target>
+                          </ui:SelectItem.Target>
+                        </ui:SelectItem>
+                        <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DelayMS="1000" DisplayName="Click SAVE 'BUTTON'" sap:VirtualizedContainerService.HintSize="358.666666666667,106" sap2010:WorkflowViewState.IdRef="Click_4" KeyModifiers="None" MouseButton="BTN_LEFT">
+                          <ui:Click.CursorPosition>
+                            <ui:CursorPosition Position="Center">
+                              <ui:CursorPosition.OffsetX>
+                                <InArgument x:TypeArguments="x:Int32" />
+                              </ui:CursorPosition.OffsetX>
+                              <ui:CursorPosition.OffsetY>
+                                <InArgument x:TypeArguments="x:Int32" />
+                              </ui:CursorPosition.OffsetY>
+                            </ui:CursorPosition>
+                          </ui:Click.CursorPosition>
+                          <ui:Click.Target>
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="f5617bc0-4dd0-43bd-8e9e-9ec028133318" InformativeScreenshot="c5a1ac295923cb64541dcf8b4a857b25" Selector="&lt;html app='chrome.exe' title='SkinStore: *' /&gt;&lt;webctrl parentid='popup' tag='BUTTON' /&gt;">
+                              <ui:Target.TimeoutMS>
+                                <InArgument x:TypeArguments="x:Int32" />
+                              </ui:Target.TimeoutMS>
+                              <ui:Target.WaitForReady>
+                                <InArgument x:TypeArguments="ui:WaitForReady" />
+                              </ui:Target.WaitForReady>
+                            </ui:Target>
+                          </ui:Click.Target>
+                        </ui:Click>
+                      </Sequence>
+                    </Sequence>
+                  </If.Else>
+                </If>
+                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="2446,93.3333333333333" sap2010:WorkflowViewState.IdRef="LogMessage_18" Level="Trace" Message="[in_TransactionItem.SpecificContent(&quot;Product&quot;).ToString]" />
+                <Assign sap:VirtualizedContainerService.HintSize="2446,61.3333333333333" sap2010:WorkflowViewState.IdRef="Assign_6">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">[strProduct]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">[in_TransactionItem.SpecificContent("Product").ToString]</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <ui:TypeInto AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" ClickBeforeTyping="False" DelayMS="1000" DisplayName="Type Into search box" EmptyField="True" sap:VirtualizedContainerService.HintSize="2446,134" sap2010:WorkflowViewState.IdRef="TypeInto_3" SimulateType="True" Text="[strProduct]">
+                  <ui:TypeInto.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="4a6e511f-7d8c-4fa1-b485-ac0603867928" InformativeScreenshot="3d5a3627113558ef2371fcec38d3400e" Selector="&lt;html app='chrome.exe' title='SkinStore:*' /&gt;&lt;webctrl tag='INPUT' class='headerSearch_input' /&gt;">
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                      <ui:Target.WaitForReady>
+                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                      </ui:Target.WaitForReady>
+                    </ui:Target>
+                  </ui:TypeInto.Target>
+                </ui:TypeInto>
+                <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="2446,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+                  <ui:CommentOut.Body>
+                    <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,226" sap2010:WorkflowViewState.IdRef="Sequence_27">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into Search Field" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_2" Text="[in_TransactionItem.SpecificContent(&quot;Product&quot;).ToString]">
+                        <ui:TypeInto.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="61cec54f-b544-4940-874f-64a789a1267d" InformativeScreenshot="4492a566ef091e369ffbe42558792b7a" Selector="&lt;html app='chrome.exe' title='SkinStore: *' /&gt;&lt;webctrl tag='INPUT' name='search' type='text' /&gt;">
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:TypeInto.Target>
+                      </ui:TypeInto>
+                    </Sequence>
+                  </ui:CommentOut.Body>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:CommentOut>
+                <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click Search" sap:VirtualizedContainerService.HintSize="2446,106" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT">
+                  <ui:Click.CursorPosition>
+                    <ui:CursorPosition Position="Center">
+                      <ui:CursorPosition.OffsetX>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:CursorPosition.OffsetX>
+                      <ui:CursorPosition.OffsetY>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:CursorPosition.OffsetY>
+                    </ui:CursorPosition>
+                  </ui:Click.CursorPosition>
+                  <ui:Click.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="40d82e80-0df0-435f-81a8-dc326cd4d35a" InformativeScreenshot="0e5702c088d0834ac98f4df34014d86e" Selector="&lt;html app='chrome.exe' title='SkinStore: *' /&gt;&lt;webctrl tag='BUTTON' type='submit' /&gt;">
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                      <ui:Target.WaitForReady>
+                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                      </ui:Target.WaitForReady>
+                    </ui:Target>
+                  </ui:Click.Target>
+                </ui:Click>
+                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="2446,93.3333333333333" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Trace" Message="[&quot;Checking Available&quot;]" />
+                <Assign sap:VirtualizedContainerService.HintSize="2446,61.3333333333333" sap2010:WorkflowViewState.IdRef="Assign_5">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">[out_Price]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">["N/A"]</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <ui:UiElementExists DisplayName="Element Exists product unavailable" Exists="[boolProUnavail]" sap:VirtualizedContainerService.HintSize="2446,106" sap2010:WorkflowViewState.IdRef="UiElementExists_2">
+                  <ui:UiElementExists.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="8f4c2962-9a3a-4d5f-81ef-7ab7e45dd7ea" InformativeScreenshot="2e91a0d26cb92d9d663ea9b405272260" Selector="&lt;html app='chrome.exe' title='Found results *SkinStore' /&gt;&lt;webctrl parentid='mainContent' tag='DIV' class='responsiveEmptySearchResult_list' innertext='*Please try and search again..*Check your spelling*Use one or two key words*Try a different search term*Please note this product may have been discontinued*' /&gt;">
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                      <ui:Target.WaitForReady>
+                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                      </ui:Target.WaitForReady>
+                    </ui:Target>
+                  </ui:UiElementExists.Target>
+                </ui:UiElementExists>
+                <If Condition="[boolProUnavail]" sap:VirtualizedContainerService.HintSize="2446,2958" sap2010:WorkflowViewState.IdRef="If_3">
+                  <If.Then>
+                    <Sequence sap:VirtualizedContainerService.HintSize="376,393.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,93.3333333333333" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Warn" Message="[&quot;Product Unavailable&quot;]" />
+                      <ui:CloseWindow TimeoutMS="{x:Null}" UseWindow="{x:Null}" DisplayName="Close Window skinstore" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="CloseWindow_3" InformativeScreenshot="ad25a74b048568ffde1f8e5e13f654b9" Selector="&lt;html app='chrome.exe' title='Found results for *' /&gt;" WaitForReady="INTERACTIVE" />
+                      <Throw Exception="[new BusinessRuleException(&quot;Product not found&quot;)]" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Throw_1" />
+                    </Sequence>
+                  </If.Then>
+                  <If.Else>
+                    <Sequence sap:VirtualizedContainerService.HintSize="916,2798.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="874,93.3333333333333" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Trace" Message="[&quot;Scraping data&quot;]" />
+                      <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="874,804" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                        <TryCatch.Try>
+                          <Sequence DisplayName="Data Scraping" sap:VirtualizedContainerService.HintSize="476,569.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                            <Sequence.Variables>
+                              <Variable x:TypeArguments="sd:DataTable" Default="[New System.Data.DataTable]" Name="ExtractDataTable" />
+                            </Sequence.Variables>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browserto products found" sap:VirtualizedContainerService.HintSize="434,344" sap2010:WorkflowViewState.IdRef="BrowserScope_4" InformativeScreenshot="800b3597e5e37d2b3b41cc6f50046053" Selector="&lt;html app='chrome.exe' title='Found results for* | SkinStore' /&gt;">
+                              <ui:BrowserScope.Body>
+                                <ActivityAction x:TypeArguments="x:Object">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                  </ActivityAction.Argument>
+                                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,198" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:ExtractData DelayBetweenPagesMS="{x:Null}" NextLinkSelector="{x:Null}" ContinueOnError="True" DataTable="[dt_ExtractDataTable]" DisplayName="Extract Structured Data 'UL'" ExtractMetadata="&lt;extract&gt;&lt;row exact='1'&gt;&lt;webctrl tag='li' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;/row&gt;&lt;column exact='1' name='Column1' attr='text'&gt;&lt;webctrl tag='li' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='a' idx='1' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='h3' idx='1' /&gt;&lt;/column&gt;&lt;column exact='1' name='Column2' attr='text'&gt;&lt;webctrl tag='li' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='div' idx='3' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='span' idx='2' /&gt;&lt;/column&gt;&lt;/extract&gt;" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="ExtractData_4" MaxNumberOfResults="0" SimulateClick="False">
+                                      <ui:ExtractData.Target>
+                                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="e12044f6-0dea-45fb-83a5-d9acd5918ba6" InformativeScreenshot="c323ca7bc3fef014b3717c847c234303" Selector="&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;main&amp;gt;div&amp;gt;ul' parentid='mainContent' tag='UL' /&gt;" WaitForReady="COMPLETE">
+                                          <ui:Target.TimeoutMS>
+                                            <InArgument x:TypeArguments="x:Int32" />
+                                          </ui:Target.TimeoutMS>
+                                        </ui:Target>
+                                      </ui:ExtractData.Target>
+                                    </ui:ExtractData>
+                                  </Sequence>
+                                </ActivityAction>
+                              </ui:BrowserScope.Body>
+                            </ui:BrowserScope>
+                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,93.3333333333333" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Trace" Message="[&quot;Data Scrap complete&quot;]" />
+                          </Sequence>
+                        </TryCatch.Try>
+                        <TryCatch.Catches>
+                          <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="480.666666666667,21.3333333333333" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ActivityAction x:TypeArguments="s:Exception">
+                              <ActivityAction.Argument>
+                                <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                              </ActivityAction.Argument>
+                              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,93.3333333333333" sap2010:WorkflowViewState.IdRef="LogMessage_13" Level="Error" Message="[&quot;Unable to fetch product data from website&quot;]" />
+                            </ActivityAction>
+                          </Catch>
+                        </TryCatch.Catches>
+                      </TryCatch>
+                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="874,93.3333333333333" sap2010:WorkflowViewState.IdRef="LogMessage_15" Level="Info" Message="[&quot;Following data fetched&quot;]" />
+                      <ui:OutputDataTable DataTable="[dt_ExtractDataTable]" DisplayName="Output Data Table" sap:VirtualizedContainerService.HintSize="874,80" sap2010:WorkflowViewState.IdRef="OutputDataTable_1" Text="[strDataTable]" />
+                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="874,93.3333333333333" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[strDataTable]" />
+                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="874,93.3333333333333" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Trace" Message="[&quot;Checking for product now&quot;]" />
+                      <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dt_ExtractDataTable]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="874,720" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+                        <ui:ForEachRow.Body>
+                          <ActivityAction x:TypeArguments="sd:DataRow">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+                            </ActivityAction.Argument>
+                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="840,600" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <If Condition="[CurrentRow(&quot;Column1&quot;).ToString.Trim.ToLower.Contains(in_TransactionItem.SpecificContent(&quot;Product&quot;).ToString.Trim.ToLower)And(CurrentRow(&quot;Column1&quot;).ToString.Trim.ToLower.Contains(in_TransactionItem.SpecificContent(&quot;SizeML&quot;).ToString.Trim.ToLower)Or CurrentRow(&quot;Column1&quot;).ToString.Trim.ToLower.Contains(in_TransactionItem.SpecificContent(&quot;SizeOZ&quot;).ToString.Trim.ToLower))]" sap:VirtualizedContainerService.HintSize="798,508" sap2010:WorkflowViewState.IdRef="If_2">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <If.Then>
+                                  <Sequence sap:VirtualizedContainerService.HintSize="376,348.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <Assign sap:VirtualizedContainerService.HintSize="334,61.3333333333333" sap2010:WorkflowViewState.IdRef="Assign_1">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="x:String">[out_Price]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="x:String">[CurrentRow("Column2").ToString]</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,93.3333333333333" sap2010:WorkflowViewState.IdRef="LogMessage_12" Level="Trace" Message="[&quot;Product found&quot;]" />
+                                    <ui:Break sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Break_1" />
+                                  </Sequence>
+                                </If.Then>
+                                <If.Else>
+                                  <Sequence sap:VirtualizedContainerService.HintSize="376,185.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,93.3333333333333" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Warn" Message="[&quot;Product not match&quot;]" />
+                                  </Sequence>
+                                </If.Else>
+                              </If>
+                            </Sequence>
+                          </ActivityAction>
+                        </ui:ForEachRow.Body>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:ForEachRow>
+                      <If Condition="[out_Price=&quot;N/A&quot;]" sap:VirtualizedContainerService.HintSize="874,449.333333333333" sap2010:WorkflowViewState.IdRef="If_5">
+                        <If.Then>
+                          <Sequence sap:VirtualizedContainerService.HintSize="376,260" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:CloseWindow TimeoutMS="{x:Null}" UseWindow="{x:Null}" DisplayName="Close Window skinstore" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="CloseWindow_4" InformativeScreenshot="ad25a74b048568ffde1f8e5e13f654b9" Selector="&lt;html app='chrome.exe' title='Found results for *' /&gt;" WaitForReady="INTERACTIVE" />
+                            <Throw Exception="[New BusinessRuleException(&quot;Product with size not found&quot;)]" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Throw_2" />
+                          </Sequence>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence sap2010:WorkflowViewState.IdRef="Sequence_25">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </Sequence>
+                        </If.Else>
+                      </If>
+                    </Sequence>
+                  </If.Else>
+                </If>
+                <ui:CloseWindow TimeoutMS="{x:Null}" UseWindow="{x:Null}" DisplayName="Close Window skinstore" sap:VirtualizedContainerService.HintSize="1338,106" sap2010:WorkflowViewState.IdRef="CloseWindow_2" InformativeScreenshot="ad25a74b048568ffde1f8e5e13f654b9" Selector="&lt;html app='chrome.exe' title='Found results for *' /&gt;" WaitForReady="INTERACTIVE" />
+              </Sequence>
+            </ActivityAction>
+          </ui:OpenBrowser.Body>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:OpenBrowser>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="3252,21.3333333333333" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Sequence sap:VirtualizedContainerService.HintSize="376,380.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_26">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,93.3333333333333" sap2010:WorkflowViewState.IdRef="LogMessage_17" Level="Error" Message="[&quot;Error occured at skinstore_Getprice xaml&quot;]" />
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,93.3333333333333" sap2010:WorkflowViewState.IdRef="LogMessage_16" Level="Error" Message="[exception.Source+exception.Message]" />
+              <Rethrow sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Rethrow_1" />
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+  </Sequence>
+</Activity>
